@@ -1,31 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
-import {Button} from "@mui/material";
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {BrowserRouter as Router, Routes,Route} from 'react-router-dom';
+import Home from "./assets/Home";
+import ErrorPage from "./ErrorPage";
+import CreatePlayer from "./CreatePlayer";
 
 
 function App() {
-  const [count, setCount] = useState(0)
-    const navigate = useNavigate();
-    function handleClick() {
-        //navigate('/createPlayer');
-    }
+
+
   return (
-    <div className="App">
-      <div>
-      <h1>Basquet Scoreboard App</h1>
-      </div>
-        <Button color="secondary" onClick={handleClick} >Create Player</Button>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      <Router>
+          <Routes>
+           <Route path="/" element={<Home/>} />
+           <Route path="/createplayer" element={<CreatePlayer/>} />
+            <Route path="*" element={<ErrorPage/>}/>
+          </Routes>
 
-      </div>
+      </Router>
 
-    </div>
   )
 }
 
