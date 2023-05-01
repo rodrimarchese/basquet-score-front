@@ -15,6 +15,7 @@ function CreatePlayer() {
 
         // Do something with the form values, e.g. send them to a server
         console.log(name, surname, position, shirtNum);
+        postPlayer()
 
         // Clear the form values
         setName('');
@@ -22,6 +23,29 @@ function CreatePlayer() {
         setPosition('');
         setShirtNum('');
     };
+
+
+    async function postPlayer() {
+        const url = 'http://localhost:8080/Player';
+        const data = { name: {name},surname: {surname},position: {position},shirtNum:{shirtNum}};
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const responseData = await response.json();
+            console.log(responseData);
+        } catch (error) {
+            console.error(error);
+        }
+    }
     return (
 
         <div>
