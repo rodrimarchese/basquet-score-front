@@ -31,19 +31,19 @@ function CreatePlayer() {
                     <form onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <TextField fullWidth id="name" label="Name" variant="outlined" value={name} onChange={(event) => setName(event.target.value)}/>
+                            <TextField fullWidth  label="Name" variant="outlined" value={name} onChange={(event) => setName(event.target.value)}/>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField fullWidth id="surname" label="Surname" variant="outlined" value={surname} onChange={(event) => setSurname(event.target.value)}/>
+                            <TextField fullWidth  label="Surname" variant="outlined" value={surname} onChange={(event) => setSurname(event.target.value)}/>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField fullWidth id="position" label="Position" variant="outlined" value={position} onChange={(event) => setPosition(event.target.value)}/>
+                            <TextField fullWidth label="Position" variant="outlined" value={position} onChange={(event) => setPosition(event.target.value)}/>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField fullWidth id="shirtNum" label="Shirt Number" variant="outlined" value={shirtNum} onChange={(event) => setShirtNum(event.target.value)}/>
+                            <TextField fullWidth  label="Shirt Number" variant="outlined" value={shirtNum} onChange={(event) => setShirtNum(event.target.value)}/>
                         </Grid>
                         <Grid item xs={12}>
-                        <Button  fullWidth variant="contained">Submit Player</Button>
+                        <Button  fullWidth variant="contained" type="submit">Submit Player</Button>
                         </Grid>
                     </Grid>
                     </form>
