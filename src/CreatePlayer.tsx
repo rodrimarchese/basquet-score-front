@@ -7,13 +7,12 @@ function CreatePlayer() {
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [position, setPosition] = useState('');
-    const [shirtNum, setShirtNum] = useState('');
+    const [shirtNum, setShirtNum] = useState(0);
 
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        // Do something with the form values, e.g. send them to a server
         console.log(name, surname, position, shirtNum);
         postPlayer()
 
@@ -21,14 +20,13 @@ function CreatePlayer() {
         setName('');
         setSurname('');
         setPosition('');
-        setShirtNum('');
+        setShirtNum(0);
     };
 
 
     async function postPlayer() {
         const url = 'http://localhost:8080/Player';
-        const data = { name: {name},surname: {surname},position: {position},shirtNum:{shirtNum}};
-
+        const data = { "name": name, "surname":surname,"position": position,"shirtNum":shirtNum}
         try {
             const response = await fetch(url, {
                 method: 'POST',
@@ -64,7 +62,7 @@ function CreatePlayer() {
                             <TextField fullWidth label="Position" variant="outlined" value={position} onChange={(event) => setPosition(event.target.value)}/>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField fullWidth  label="Shirt Number" variant="outlined" value={shirtNum} onChange={(event) => setShirtNum(event.target.value)}/>
+                            <TextField fullWidth  label="Shirt Number" variant="outlined" value={shirtNum} onChange={(event) => setShirtNum(Number(event.target.value))}/>
                         </Grid>
                         <Grid item xs={12}>
                         <Button  fullWidth variant="contained" type="submit">Submit Player</Button>
