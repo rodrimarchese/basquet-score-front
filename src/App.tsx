@@ -13,7 +13,7 @@ function App() {
       <Router>
           <Routes>
            <Route path="/" element={<Home/>} />
-           <Route path="/createplayer" element={<CreatePlayer/>} />
+           <Route path="/create-player" element={<CreatePlayer/>} />
             <Route path="*" element={<ErrorPage/>}/>
           </Routes>
 
