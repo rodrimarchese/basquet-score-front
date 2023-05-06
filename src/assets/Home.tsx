@@ -10,9 +10,8 @@ function Home() {
                     <h1>Basquet Scoreboard App</h1>
                 </div>
                 <Button color="secondary"  onClick={() => navigate('/create-player')}>Create Player</Button>
-
+                <Button color="primary"  onClick={() => navigate('/create-team')}>Create Team</Button>
             </div>
-
         </div>
     )
 }
