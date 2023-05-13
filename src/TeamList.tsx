@@ -14,7 +14,7 @@ function TeamList({ teams }: TeamListProps) {
                 <ListItem key={team.id}>
                     <ListItemAvatar>
                         <Avatar>
-                            {team.name}
+                            {team.name.charAt(0)}
                         </Avatar>
                     </ListItemAvatar>
                     <ListItemText primary={team.name} />

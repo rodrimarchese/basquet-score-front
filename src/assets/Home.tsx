@@ -1,4 +1,4 @@
-import {Button} from "@mui/material";
+import {Button, Card, CardContent, Grid} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from 'react';
 import TeamList from "../TeamList";
@@ -36,10 +36,35 @@ function Home() {
                 <div>
                     <h1>Basquet Scoreboard App</h1>
                 </div>
-                <Button color="secondary"  onClick={() => navigate('/create-player')}>Create Player</Button>
-                <Button color="primary"  onClick={() => navigate('/create-team')}>Create Team</Button>
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <Card>
+                            <CardContent>
+                        <h4>Actions</h4>
+                        <Grid container spacing={2}>
+
+                            <Grid item xs={12}>
+                        <Button fullWidth color="secondary" variant="contained"  onClick={() => navigate('/create-player')}>Create Player</Button>
+                            </Grid>
+                            <Grid item xs={12}>
+                        <Button fullWidth color="primary" variant="contained"  onClick={() => navigate('/create-team')}>Create Team</Button>
+                            </Grid>
+                        </Grid>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Card>
+                            <CardContent>
+                        <h4> Current Teams</h4>
+                        <TeamList teams={teams}/>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                </Grid>
+
             </div>
-            <TeamList teams={teams}/>
+
         </div>
     )
 }
