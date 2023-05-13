@@ -1,24 +1,27 @@
 import React from 'react';
 import { List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@mui/material';
+import Home from "./assets/Home";
 
 interface TeamListProps {
-    teamNames: string[];
+    teams: { id: string; name: string; createdAt: string }[];
 }
 
-function TeamList({ teamNames }: TeamListProps) {
+function TeamList({ teams }: TeamListProps) {
 
     return (
         <List>
-            {teamNames.map((name, index) => (
-                <ListItem key={index}>
+            {teams.map((team) => (
+                <ListItem key={team.id}>
                     <ListItemAvatar>
                         <Avatar>
-                            {name.charAt(0)}
+                            {team.name}
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary={name} />
+                    <ListItemText primary={team.name} />
                 </ListItem>
             ))}
         </List>
     );
 }
+
+export default TeamList
