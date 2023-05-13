@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@mui/material';
-import Home from "./assets/Home";
+
 
 interface TeamListProps {
     teams: { id: string; name: string; createdAt: string }[];

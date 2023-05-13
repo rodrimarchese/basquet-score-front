@@ -2,12 +2,15 @@ import {Button, Card, CardContent, Grid} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from 'react';
 import TeamList from "../TeamList";
+import PlayerList from "../PlayerList";
 
 function Home() {
     const [teams, setTeams] = useState<{ id: string; name: string; createdAt: string }[]>([]);
+    const [players, setPlayers] = useState<{ id: string; name: string; surname: string; position:string;shirtNum:number; createdAt: string }[]>([]);
 
         useEffect(() => {
           getTeams()
+          getPlayers()
         }, []);
 
     async function getTeams() {
@@ -29,12 +32,30 @@ function Home() {
         }
     }
 
+    async function getPlayers() {
+        const url = 'http://localhost:8080/Player';
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const responseData = await response.json();
+            setPlayers(responseData);
+        } catch (error) {
+            console.error(error);
+        }
+    }
     const navigate = useNavigate();
     return (
         <div className="App">
             <div className="App">
                 <div>
-                    <h1>Basquet Scoreboard App</h1>
+                    <h1>Basketball Scoreboard App</h1>
                 </div>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
@@ -60,6 +81,15 @@ function Home() {
                         <TeamList teams={teams}/>
                             </CardContent>
                         </Card>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Card>
+                            <CardContent>
+                                <h4> Current Players</h4>
+                                <PlayerList players={players}/>
+                            </CardContent>
+                        </Card>
+
                     </Grid>
                 </Grid>
 
