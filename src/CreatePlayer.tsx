@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
 
 import {Button, Card, CardContent, Grid, TextField} from '@mui/material';
+import {useNavigate} from "react-router-dom";
 
 
 function CreatePlayer() {
+    const navigate = useNavigate();
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [position, setPosition] = useState('');
@@ -44,6 +46,7 @@ function CreatePlayer() {
             console.error(error);
         }
     }
+
     return (
 
         <div>
@@ -72,6 +75,8 @@ function CreatePlayer() {
 
                 </CardContent>
             </Card>
+
+            <Button color="secondary"  onClick={() => navigate('/')}>Back</Button>
         </div>
 
 

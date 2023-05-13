@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
 
 import {Button, Card, CardContent, Grid, TextField} from '@mui/material';
+import {useNavigate} from "react-router-dom";
 
 
 function CreateTeam() {
+    const navigate = useNavigate();
     const [name, setName] = useState('');
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -56,6 +58,7 @@ function CreateTeam() {
 
                 </CardContent>
             </Card>
+            <Button color="secondary"  onClick={() => navigate('/')}>Back</Button>
         </div>
 
 
