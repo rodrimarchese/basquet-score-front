@@ -57,23 +57,24 @@ function Home() {
                 <div>
                     <h1>Basketball Scoreboard App</h1>
                 </div>
-                <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                        <Card>
-                            <CardContent>
-                        <h4>Actions</h4>
+                <Grid container  direction="column" spacing={2}>
+                    <Grid item xs={12}>
+                <Card>
+                    <CardContent>
                         <Grid container spacing={2}>
 
                             <Grid item xs={12}>
-                        <Button fullWidth color="secondary" variant="contained"  onClick={() => navigate('/create-player')}>Create Player</Button>
+                                <Button fullWidth color="secondary" variant="contained"  onClick={() => navigate('/create-player')}>Create Player</Button>
                             </Grid>
                             <Grid item xs={12}>
-                        <Button fullWidth color="primary" variant="contained"  onClick={() => navigate('/create-team')}>Create Team</Button>
+                                <Button fullWidth color="primary" variant="contained"  onClick={() => navigate('/create-team')}>Create Team</Button>
                             </Grid>
                         </Grid>
-                            </CardContent>
-                        </Card>
+                    </CardContent>
+                </Card>
                     </Grid>
+                    <Grid item xs={12}>
+                <Grid container  direction="row"spacing={2}>
                     <Grid item xs={6}>
                         <Card>
                             <CardContent>
@@ -90,6 +91,8 @@ function Home() {
                             </CardContent>
                         </Card>
 
+                    </Grid>
+                </Grid>
                     </Grid>
                 </Grid>
 
