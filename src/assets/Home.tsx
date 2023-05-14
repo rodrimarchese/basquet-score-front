@@ -69,6 +69,9 @@ function Home() {
                             <Grid item xs={12}>
                                 <Button fullWidth color="primary" variant="contained"  onClick={() => navigate('/create-team')}>Create Team</Button>
                             </Grid>
+                            <Grid item xs={12}>
+                                <Button fullWidth color="info" variant="contained"  onClick={() => navigate('/start-game')}>Start Game</Button>
+                            </Grid>
                         </Grid>
                     </CardContent>
                 </Card>

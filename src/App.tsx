@@ -5,10 +5,34 @@ import Home from "./assets/Home";
 import ErrorPage from "./ErrorPage";
 import CreatePlayer from "./CreatePlayer";
 import CreateTeam from "./CreateTeam";
+import StartGame from "./StartGame";
+import {useEffect, useState} from "react";
 
 
 function App() {
+    const [teams, setTeams] = useState<{ id: string; name: string; createdAt: string }[]>([]);
+    useEffect(() => {
+        getTeams()
+    }, []);
 
+    async function getTeams() {
+        const url = 'http://localhost:8080/Team';
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const responseData = await response.json();
+            setTeams(responseData);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
   return (
       <Router>
@@ -16,6 +40,8 @@ function App() {
            <Route path="/" element={<Home/>} />
            <Route path="/create-player" element={<CreatePlayer/>} />
            <Route path="/create-team" element={<CreateTeam/>} />
+           <Route path="/start-game" element={<StartGame teams={teams}/>} />
+
             <Route path="*" element={<ErrorPage/>}/>
           </Routes>
 
