@@ -13,7 +13,7 @@ const DropdownSelectPlayer: React.FC<DropdownProps> = ({ players }) => {
     };
 
     return (
-        <Select value={selectedOption} onChange={()=>handleChange}>
+        <Select data-cy="player-dropdown" value={selectedOption} onChange={()=>handleChange}>
             {players.map((player) => (
                 <MenuItem key={player.id} value={player.name}>
                     {player.name}

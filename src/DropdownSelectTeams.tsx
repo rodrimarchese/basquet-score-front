@@ -14,9 +14,9 @@ const DropdownSelectTeams: React.FC<DropdownProps> = ({ teams,selectedTeam,setSe
     };
 
     return (
-        <Select fullWidth value={selectedTeam} onChange={handleChange}>
+        <Select inputProps={{"data-cy":"team-dropdown" }} fullWidth value={selectedTeam} onChange={handleChange}>
             {teams.map((team) => (
-                <MenuItem  key={team.id} value={team.id}>
+                <MenuItem data-cy={`option-${team.id}`} key={team.id} value={team.id}>
                     {team.name}
                 </MenuItem>
             ))}

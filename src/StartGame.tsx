@@ -32,7 +32,7 @@ function StartGame({teams}:StartGameProps) {
 
     async function postGame() {
         const url = 'http://localhost:8080/game';
-        const data = { "awayTeamId": awayTeam, "homeTeamId":homeTeam,"Date": selectedDate}
+        const data = { "awayTeamId": awayTeam, "homeTeamId":homeTeam,"date": selectedDate}
         try {
             const response = await fetch(url, {
                 method: 'POST',
@@ -65,7 +65,7 @@ function StartGame({teams}:StartGameProps) {
                             </Grid>
                             <Grid item xs={12}>
                                 <h4> Select Away Team</h4>
-                                <DropdownSelectTeams teams={teams} selectedTeam={awayTeam} setSelectedTeam={setAwayTeam}/>
+                                <DropdownSelectTeams  teams={teams} selectedTeam={awayTeam} setSelectedTeam={setAwayTeam}/>
                             </Grid>
                             <Grid item xs={12}>
                                 <h4> Select Date </h4>
