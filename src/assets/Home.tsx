@@ -64,7 +64,7 @@ function Home() {
                         <Grid container spacing={2}>
 
                             <Grid item xs={12}>
-                                <Button fullWidth color="secondary" variant="contained"  onClick={() => navigate('/create-player')}>Create Player</Button>
+                                <Button  data-test="create-player" fullWidth color="secondary" variant="contained"  onClick={() => navigate('/create-player')}>Create Player</Button>
                             </Grid>
                             <Grid item xs={12}>
                                 <Button fullWidth color="primary" variant="contained"  onClick={() => navigate('/create-team')}>Create Team</Button>
