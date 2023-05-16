@@ -1,10 +1,10 @@
 import React from 'react'
-import ErrorPage from '../ErrorPage'
+import TeamList from '../../src/TeamList'
 
-describe('<ErrorPage />', () => {
+describe('<TeamList />', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react
-    cy.mount(<ErrorPage />)
+    cy.mount(<TeamList />)
   })
   Cypress.on('uncaught:exception', (err, runnable) => {
     // returning false here prevents Cypress from

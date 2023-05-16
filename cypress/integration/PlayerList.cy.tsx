@@ -1,5 +1,5 @@
 import React from 'react'
-import PlayerList from '../PlayerList'
+import PlayerList from '../../src/PlayerList'
 
 describe('<PlayerList />', () => {
   it('renders', () => {

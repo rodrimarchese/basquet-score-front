@@ -1,10 +1,10 @@
 import React from 'react'
-import CreatePlayer from '../CreatePlayer'
+import StartGame from '../../src/StartGame'
 
-describe('<CreatePlayer />', () => {
+describe('<StartGame />', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react
-    cy.mount(<CreatePlayer />)
+    cy.mount(<StartGame />)
   })
   Cypress.on('uncaught:exception', (err, runnable) => {
     // returning false here prevents Cypress from

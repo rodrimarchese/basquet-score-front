@@ -1,5 +1,5 @@
 import React from 'react'
-import DateSelector from '../DateSelector'
+import DateSelector from '../../src/DateSelector'
 
 describe('<DateSelector />', () => {
   it('renders', () => {

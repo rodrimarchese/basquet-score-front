@@ -1,10 +1,10 @@
 import React from 'react'
-import StartGame from '../StartGame'
+import CreateTeam from '../../src/CreateTeam'
 
-describe('<StartGame />', () => {
+describe('<CreateTeam />', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react
-    cy.mount(<StartGame />)
+    cy.mount(<CreateTeam />)
   })
   Cypress.on('uncaught:exception', (err, runnable) => {
     // returning false here prevents Cypress from

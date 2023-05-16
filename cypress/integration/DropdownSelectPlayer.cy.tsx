@@ -1,10 +1,10 @@
 import React from 'react'
-import TeamList from '../TeamList'
+import DropdownSelectPlayer from '../../src/DropdownSelectPlayer'
 
-describe('<TeamList />', () => {
+describe('<DropdownSelectPlayer />', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react
-    cy.mount(<TeamList />)
+    cy.mount(<DropdownSelectPlayer />)
   })
   Cypress.on('uncaught:exception', (err, runnable) => {
     // returning false here prevents Cypress from

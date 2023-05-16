@@ -1,10 +1,10 @@
 import React from 'react'
-import DropdownSelectPlayer from '../DropdownSelectPlayer'
+import ErrorPage from '../../src/ErrorPage'
 
-describe('<DropdownSelectPlayer />', () => {
+describe('<ErrorPage />', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react
-    cy.mount(<DropdownSelectPlayer />)
+    cy.mount(<ErrorPage />)
   })
   Cypress.on('uncaught:exception', (err, runnable) => {
     // returning false here prevents Cypress from
