@@ -3,24 +3,19 @@ import { List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@mui/mater
 
 
 interface GamesListProps {
-    players: { id: string; name: string; surname: string; position:string; shirtNum:number; createdAt: string }[];
+    games: { id: string; homeTeamId: string; awayTeamId: string;  homeScore:number;  awayScore:number; date: Date }[];
+    teams: { id: string; name: string; createdAt: string }[];
 }
 
-function GamesList({ players }: GamesListProps) {
+function GamesList({ games, teams }: GamesListProps) {
 
     return (
         <List>
-            {players.map((player) => (
-                <ListItem key={player.id}>
-                    <ListItemAvatar>
-                        <Avatar>
-                            {player.name.charAt(0)}
-                        </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primary={player.name} />
-                    <ListItemText primary={player.surname} />
-                    <ListItemText primary={player.position} />
-                    <ListItemText primary={player.shirtNum} />
+            {games.map((game) => (
+                <ListItem key={game.id}>
+                    <ListItemText primary={game.homeScore} />
+                    <ListItemText primary={game.awayScore} />
+                    <ListItemText primary={game.date.toString()} />
                 </ListItem>
             ))}
         </List>
