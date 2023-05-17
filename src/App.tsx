@@ -7,6 +7,7 @@ import CreatePlayer from "./CreatePlayer";
 import CreateTeam from "./CreateTeam";
 import StartGame from "./StartGame";
 import {useEffect, useState} from "react";
+import GameStats from "./GameStats";
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
            <Route path="/create-player" element={<CreatePlayer/>} />
            <Route path="/create-team" element={<CreateTeam/>} />
            <Route path="/start-game" element={<StartGame teams={teams}/>} />
+           <Route path="/gameStats/:gameId"  element={<GameStats/>}/>
 
             <Route path="*" element={<ErrorPage/>}/>
           </Routes>

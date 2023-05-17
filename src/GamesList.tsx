@@ -1,6 +1,7 @@
 import React from 'react';
-import { List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@mui/material';
+import { List, ListItem,  ListItemText } from '@mui/material';
 import {useNavigate} from "react-router-dom";
+
 
 
 interface GamesListProps {
@@ -8,12 +9,17 @@ interface GamesListProps {
     teams: { id: string; name: string; createdAt: string }[];
 }
 
-function GamesList({ games, teams }: GamesListProps) {
 
+function GamesList({ games, teams }: GamesListProps) {
+    const navigate = useNavigate()
+
+    const navigateToGameStats = (gameId: string) => {
+       navigate(`/gameStats/${gameId}`)
+    };
     return (
         <List>
             {games.map((game) => (
-                <ListItem key={game.id} onClick={()=>useNavigate()}>
+                <ListItem key={game.id} onClick={()=>navigateToGameStats(game.id)}>
                     <ListItemText primary={game.homeScore} />
                     <ListItemText primary={game.awayScore} />
                     <ListItemText primary={game.date.toString()} />
