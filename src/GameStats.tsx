@@ -111,6 +111,7 @@ function GameStats() {
       }
 
       const responseData = await response.json();
+      getGame(gameId);
     } catch (error) {
       console.log(error);
     }
@@ -138,6 +139,7 @@ function GameStats() {
       }
 
       const responseData = await response.json();
+      getGame(gameId);
     } catch (error) {
       console.log(error);
     }
