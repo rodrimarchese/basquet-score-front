@@ -109,7 +109,7 @@ function CreatePlayer() {
             return player
         }else{
             return {firstName: "", lastName: ""}
-        }surname
+        }
     }
 
 
