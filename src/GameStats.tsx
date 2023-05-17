@@ -411,10 +411,10 @@ function GameStats() {
             >
               <div style={{ flex: 1, textAlign: "center" }}></div>
               <div style={{ flex: 1, textAlign: "center", fontSize: "35px" }}>
-                <h4>{game?.homeScore}</h4>
+                <h4>{scoreHome}</h4>
               </div>
               <div style={{ flex: 1, textAlign: "center", fontSize: "35px" }}>
-                <h4>{game?.awayScore}</h4>
+                <h4>{scoreAway}</h4>
               </div>
               <div style={{ flex: 1, textAlign: "center" }}></div>
             </div>
@@ -439,6 +439,7 @@ function GameStats() {
               </div>
             </div>
           </List>
+          <div>{/* button to finsh game */}</div>
         </>
       )}
     </>
