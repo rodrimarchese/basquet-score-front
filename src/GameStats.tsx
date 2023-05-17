@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import PlayerStats from "./PlayerStats";
+import { GameScore } from "./GameScore";
 
 interface Game {
   id: string;
@@ -90,6 +91,7 @@ function GameStats() {
 
       const responseData = await response.json();
       console.log(responseData);
+      //   then go to home
     } catch (error) {
       console.error(error);
     }
@@ -435,12 +437,16 @@ function GameStats() {
               }}
             >
               <div style={{ flex: 1, textAlign: "center" }}></div>
-              <div style={{ flex: 1, textAlign: "center", fontSize: "35px" }}>
+
+              <GameScore scoreHome={scoreHome} scoreAway={scoreAway} />
+
+              {/* <div style={{ flex: 1, textAlign: "center", fontSize: "35px" }}>
                 <h4>{scoreHome}</h4>
               </div>
               <div style={{ flex: 1, textAlign: "center", fontSize: "35px" }}>
                 <h4>{scoreAway}</h4>
-              </div>
+              </div> */}
+
               <div style={{ flex: 1, textAlign: "center" }}></div>
             </div>
             <div
