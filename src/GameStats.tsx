@@ -112,8 +112,8 @@ function GameStats() {
       const responseData = await response.json();
       setGame(responseData);
       console.log(responseData);
-      setScoreHome(responseData.homeScore)
-      setScoreAway(responseData.awayScore)
+      setScoreHome(responseData.homeScore);
+      setScoreAway(responseData.awayScore);
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -144,10 +144,10 @@ function GameStats() {
         throw new Error("Network response was not ok");
       }
 
-      const responseData = await response.json();
       isHome
         ? setScoreHome(scoreHome + points)
         : setScoreAway(scoreAway + points);
+      const responseData = await response.json();
     } catch (error) {
       console.log(error);
     }
