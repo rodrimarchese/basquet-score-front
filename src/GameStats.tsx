@@ -54,8 +54,8 @@ function GameStats() {
   const [loading, setLoading] = useState(true);
   const [game, setGame] = useState<Game>();
 
-  const [scoreHome, setScoreHome] = useState<any>(game?.homeScore);
-  const [scoreAway, setScoreAway] = useState<any>(game?.awayScore);
+  const [scoreHome, setScoreHome] = useState<number>(game?.homeScore || 0);
+  const [scoreAway, setScoreAway] = useState<number>(game?.awayScore || 0);
 
   const [selectedPlayerHomeId, setSelectedPlayerHomeId] = useState<string>("");
   const [selectedPlayerAwayId, setSelectedPlayerAwayId] = useState<string>("");
@@ -70,7 +70,26 @@ function GameStats() {
     getGame(gameId);
   }, []);
 
-  const handleFinishGame = async () => {};
+  const handleFinishGame = async () => {
+    // /end_game/:game_id
+
+    const url = "http://localhost:8080/game/end_game/" + gameId;
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const responseData = await response.json();
+      console.log(responseData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   async function getGame(gameId: string | undefined) {
     const url = "http://localhost:8080/game/get_all_info/" + gameId;
