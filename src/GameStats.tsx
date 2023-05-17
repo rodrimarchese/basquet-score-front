@@ -157,6 +157,7 @@ function GameStats() {
                   label="Jugador"
                   labelId="jugador-select-label"
                   id="demo-simple-select"
+                  style={{ width: "200px" }}
                   onChange={(event) => {
                     setSelectedPlayerHomeId(event.target.value as string);
                   }}
@@ -174,6 +175,7 @@ function GameStats() {
                   label="Jugador"
                   labelId="jugador-select-label"
                   id="demo-simple-select"
+                  style={{ width: "200px" }}
                   onChange={(event) => {
                     setSelectedPlayerAwayId(event.target.value as string);
                   }}
@@ -192,6 +194,7 @@ function GameStats() {
                 flexDirection: "row",
                 justifyContent: "space-around",
                 marginBottom: "5px",
+                marginTop: "15px",
               }}
             >
               <button
