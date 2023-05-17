@@ -89,9 +89,9 @@ function GameStats() {
   const handlePoints = async (playerId: string, points: number) => {
     const url = "http://localhost:8080/game/player_score";
     const data = {
-      playerId: playerId,
-      gameId: gameId,
-      score: points,
+      player_id: playerId,
+      game_id: gameId,
+      score: points.toString(),
     };
 
     console.log(data);
@@ -108,7 +108,7 @@ function GameStats() {
 
       const responseData = await response.json();
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
