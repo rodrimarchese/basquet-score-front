@@ -5,12 +5,14 @@ import TeamList from "../TeamList";
 import PlayerList from "../PlayerList";
 import GamesList from "../GamesList";
 
-
+type team = {
+    id: string; name: string; createdAt: string
+}
 function Home() {
     const [loading, setLoading] = useState(true);
     const [value, setValue] = useState(0);
-    const [teams, setTeams] = useState<{ id: string; name: string; createdAt: string }[]>([]);
-    const [players, setPlayers] = useState<{ id: string; name: string; surname: string; position:string;shirtNum:number; createdAt: string }[]>([]);
+    const [teams, setTeams] = useState<team[]>([]);
+    const [players, setPlayers] = useState<{ id: string; name: string; surname: string; position:string;shirtNum:number; createdAt: string, teamId:  string | null }[]>([]);
     const [games, setGames] = useState<{ id: string; homeTeamId: string; awayTeamId: string;  homeScore:number;  awayScore:number; date: Date }[]>([]);
 
         useEffect(() => {
@@ -21,7 +23,7 @@ function Home() {
         }, []);
 
     async function getTeams() {
-        const url = 'http://localhost:8080/Team';
+        const url = 'http://localhost:8080/team';
         try {
             const response = await fetch(url, {
                 method: 'GET',
@@ -131,7 +133,7 @@ function Home() {
                     <Card>
                         <CardContent>
                             <h4> Current Players</h4>
-                    <PlayerList players={players} />
+                    <PlayerList players={players} teams={teams} />
                         </CardContent>
                     </Card>
                         </Grid>
