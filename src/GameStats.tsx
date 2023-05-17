@@ -112,6 +112,8 @@ function GameStats() {
       const responseData = await response.json();
       setGame(responseData);
       console.log(responseData);
+      setScoreHome(responseData.homeScore)
+      setScoreAway(responseData.awayScore)
       setLoading(false);
     } catch (error) {
       console.error(error);
