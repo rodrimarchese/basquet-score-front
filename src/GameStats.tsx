@@ -54,8 +54,8 @@ function GameStats() {
   const [loading, setLoading] = useState(true);
   const [game, setGame] = useState<Game>();
 
-  const [scoreHome, setScoreHome] = useState<number>(game?.homeScore || 0);
-  const [scoreAway, setScoreAway] = useState<number>(game?.awayScore || 0);
+  const [scoreHome, setScoreHome] = useState<any>(game?.homeScore);
+  const [scoreAway, setScoreAway] = useState<any>(game?.awayScore);
 
   const [selectedPlayerHomeId, setSelectedPlayerHomeId] = useState<string>("");
   const [selectedPlayerAwayId, setSelectedPlayerAwayId] = useState<string>("");
@@ -69,6 +69,8 @@ function GameStats() {
   useEffect(() => {
     getGame(gameId);
   }, []);
+
+  const handleFinishGame = async () => {};
 
   async function getGame(gameId: string | undefined) {
     const url = "http://localhost:8080/game/get_all_info/" + gameId;
@@ -439,7 +441,16 @@ function GameStats() {
               </div>
             </div>
           </List>
-          <div>{/* button to finsh game */}</div>
+          <div>
+            {/* button to finsh game */}
+            <button
+              onClick={() => {
+                handleFinishGame();
+              }}
+            >
+              Finalizar partido
+            </button>
+          </div>
         </>
       )}
     </>
