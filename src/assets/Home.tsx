@@ -4,9 +4,10 @@ import React, {useEffect, useState} from 'react';
 import TeamList from "../TeamList";
 import PlayerList from "../PlayerList";
 import GamesList from "../GamesList";
-import basketballBackground from '/src/wallpaperflare.com_wallpaper.jpg';
+
 
 function Home() {
+    const [loading, setLoading] = useState(true);
     const [value, setValue] = useState(0);
     const [teams, setTeams] = useState<{ id: string; name: string; createdAt: string }[]>([]);
     const [players, setPlayers] = useState<{ id: string; name: string; surname: string; position:string;shirtNum:number; createdAt: string }[]>([]);
@@ -33,6 +34,7 @@ function Home() {
 
             const responseData = await response.json();
             setTeams(responseData);
+
         } catch (error) {
             console.error(error);
         }
@@ -70,7 +72,8 @@ function Home() {
             }
 
             const responseData = await response.json();
-            setGames(responseData);
+            setGames(responseData.games);
+            setLoading(false);
         } catch (error) {
             console.error(error);
         }
@@ -80,6 +83,10 @@ function Home() {
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
     return (
         <div className="App" >
             <h1>Basketball Scoreboard App</h1>

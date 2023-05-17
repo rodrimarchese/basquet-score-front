@@ -13,9 +13,12 @@ interface GamesListProps {
 function GamesList({ games, teams }: GamesListProps) {
     const navigate = useNavigate()
 
+
+
     const navigateToGameStats = (gameId: string) => {
        navigate(`/gameStats/${gameId}`)
     };
+
     return (
         <List>
             {games.map((game) => (

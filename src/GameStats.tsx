@@ -16,7 +16,7 @@ function GameStats() {
     }, []);
 
     async function getGame(gameId: string | undefined) {
-        const url = 'http://localhost:8080/game/'+gameId;
+        const url = 'http://localhost:8080/game/get_all_info/'+gameId;
         try {
             const response = await fetch(url, {
                 method: 'GET',
