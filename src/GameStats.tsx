@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
-  Grid,
   InputLabel,
   List,
-  ListItemText,
   MenuItem,
   Select,
 } from "@mui/material";
@@ -56,6 +54,9 @@ function GameStats() {
   const [loading, setLoading] = useState(true);
   const [game, setGame] = useState<Game>();
 
+  const [scoreHome, setScoreHome] = useState<number>(game?.homeScore || 0);
+  const [scoreAway, setScoreAway] = useState<number>(game?.awayScore || 0);
+
   const [selectedPlayerHomeId, setSelectedPlayerHomeId] = useState<string>("");
   const [selectedPlayerAwayId, setSelectedPlayerAwayId] = useState<string>("");
 
@@ -90,7 +91,11 @@ function GameStats() {
     }
   }
 
-  const handlePoints = async (playerId: string, points: number) => {
+  const handlePoints = async (
+    isHome: boolean,
+    playerId: string,
+    points: number
+  ) => {
     const url = "http://localhost:8080/game/player_score";
     const data = {
       player_id: playerId,
@@ -111,7 +116,9 @@ function GameStats() {
       }
 
       const responseData = await response.json();
-      getGame(gameId);
+      isHome
+        ? setScoreHome(scoreHome + points)
+        : setScoreAway(scoreAway + points);
     } catch (error) {
       console.log(error);
     }
@@ -139,7 +146,6 @@ function GameStats() {
       }
 
       const responseData = await response.json();
-      getGame(gameId);
     } catch (error) {
       console.log(error);
     }
@@ -233,7 +239,7 @@ function GameStats() {
             >
               <button
                 onClick={() => {
-                  handlePoints(selectedPlayerHomeId, 1);
+                  handlePoints(true, selectedPlayerHomeId, 1);
                 }}
               >
                 +1
@@ -241,7 +247,7 @@ function GameStats() {
               |
               <button
                 onClick={() => {
-                  handlePoints(selectedPlayerAwayId, 1);
+                  handlePoints(false, selectedPlayerAwayId, 1);
                 }}
               >
                 +1
@@ -257,7 +263,7 @@ function GameStats() {
             >
               <button
                 onClick={() => {
-                  handlePoints(selectedPlayerHomeId, 2);
+                  handlePoints(true, selectedPlayerHomeId, 2);
                 }}
               >
                 +2
@@ -265,7 +271,7 @@ function GameStats() {
               |
               <button
                 onClick={() => {
-                  handlePoints(selectedPlayerAwayId, 2);
+                  handlePoints(false, selectedPlayerAwayId, 2);
                 }}
               >
                 +2
@@ -281,7 +287,7 @@ function GameStats() {
             >
               <button
                 onClick={() => {
-                  handlePoints(selectedPlayerHomeId, 3);
+                  handlePoints(true, selectedPlayerHomeId, 3);
                 }}
               >
                 +3
@@ -289,7 +295,7 @@ function GameStats() {
               |
               <button
                 onClick={() => {
-                  handlePoints(selectedPlayerAwayId, 3);
+                  handlePoints(false, selectedPlayerAwayId, 3);
                 }}
               >
                 +3
