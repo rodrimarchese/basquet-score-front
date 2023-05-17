@@ -54,8 +54,8 @@ function GameStats() {
   const [loading, setLoading] = useState(true);
   const [game, setGame] = useState<Game>();
 
-  const [scoreHome, setScoreHome] = useState<number>(game?.homeScore || 0);
-  const [scoreAway, setScoreAway] = useState<number>(game?.awayScore || 0);
+  const [scoreHome, setScoreHome] = useState<number>(0);
+  const [scoreAway, setScoreAway] = useState<number>(0);
 
   const [selectedPlayerHomeId, setSelectedPlayerHomeId] = useState<string>("");
   const [selectedPlayerAwayId, setSelectedPlayerAwayId] = useState<string>("");
@@ -68,6 +68,10 @@ function GameStats() {
 
   useEffect(() => {
     getGame(gameId);
+    if (game) {
+      setScoreHome(game.homeScore);
+      setScoreAway(game.awayScore);
+    }
   }, []);
 
   const handleFinishGame = async () => {
