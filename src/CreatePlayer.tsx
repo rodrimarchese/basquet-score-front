@@ -4,14 +4,19 @@ import {Button, Card, CardContent, Grid, TextField, Autocomplete} from '@mui/mat
 import {useNavigate} from "react-router-dom";
 import {Simulate} from "react-dom/test-utils";
 import play = Simulate.play;
-
+import DropdownSelectTeams from "./DropdownSelectTeams";
+interface CreatePlayerProps {
+    teams: { id: string; name: string; createdAt: string }[]
+}
 type player = {
     firstName: string,
     lastName: string
 }
-function CreatePlayer() {
+
+function CreatePlayer({ teams }: CreatePlayerProps) {
     const navigate = useNavigate();
     const [name, setName] = useState('');
+    const [team, setTeam] = useState("");
     const [surname, setSurname] = useState('');
     const [position, setPosition] = useState('');
     const [shirtNum, setShirtNum] = useState(0);
@@ -41,7 +46,8 @@ function CreatePlayer() {
 
     async function postPlayer() {
         const url = 'http://localhost:8080/Player';
-        const data = { "name": name, "surname":surname,"position": position,"shirtNum":shirtNum}
+
+        const data = { "name": name, "surname":surname,"position": position,"shirtNum":shirtNum, "teamId": team}
         try {
             const response = await fetch(url, {
                 method: 'POST',
@@ -99,7 +105,7 @@ function CreatePlayer() {
         if(player){
             return player
         }else{
-            return {firstName: "", lastName: ""}
+            return {firstName: searchTerm, lastName: ""}
         }
     }
 
@@ -138,19 +144,10 @@ function CreatePlayer() {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <Autocomplete
-                                options={players}
-                                getOptionLabel={(option:{firstName: string, lastName: string}) => option.lastName}
-                                renderInput={(params) => (
-                                    <TextField
-                                        {...params}
-                                        label="Surname"
-                                        onChange={e => setSearchTerm(e.target.value)}
-                                    />
-                                )}
-                                onChange={handleOptionSelect}
-                                value={setValueSurname()}
-                            />
+                            <TextField fullWidth label="Surname" variant="outlined" value={surname} onChange={(event) => setSurname(event.target.value)}/>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <DropdownSelectTeams  teams={teams} selectedTeam={team} setSelectedTeam={setTeam}/>
                         </Grid>
                         <Grid item xs={12}>
                             <TextField fullWidth label="Position" variant="outlined" value={position} onChange={(event) => setPosition(event.target.value)}/>
