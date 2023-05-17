@@ -1,16 +1,22 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
-import {Button, Card, CardContent, Grid, TextField} from '@mui/material';
+import {Button, Card, CardContent, Grid, TextField, Autocomplete} from '@mui/material';
 import {useNavigate} from "react-router-dom";
+import {Simulate} from "react-dom/test-utils";
+import play = Simulate.play;
 
-
+type player = {
+    firstName: string,
+    lastName: string
+}
 function CreatePlayer() {
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [position, setPosition] = useState('');
     const [shirtNum, setShirtNum] = useState(0);
-
+    const [players , setPlayers] = useState<player[]>([]);
+    const [searchTerm, setSearchTerm] = useState("");
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -25,6 +31,13 @@ function CreatePlayer() {
         setShirtNum(0);
     };
 
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+            fetchData(searchTerm);
+        }, 800);
+        return () => clearTimeout(delayDebounceFn);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchTerm]);
 
     async function postPlayer() {
         const url = 'http://localhost:8080/Player';
@@ -47,6 +60,60 @@ function CreatePlayer() {
         }
     }
 
+
+    const handleOptionSelect = (
+        event: React.ChangeEvent<{}>,
+        value: player | null
+    ) => {
+        if (value) {
+            setName(value.firstName);
+            setSurname(value.lastName);
+        } else {
+            setName('');
+            setSurname('');
+        }
+    };
+
+    const fetchData = async (searchTerm: string) => {
+        try {
+            let url = 'http://localhost:8080/Player/player_names'
+            if(searchTerm !== "") {
+                url = 'http://localhost:8080/Player/player_names' + '?contains=' + searchTerm;
+            }
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const responseData = await response.json();
+            setPlayers(responseData.players);
+        } catch (error) {
+            console.error('Error fetching options:', error);
+        }
+    }
+    const setValueName = () => {
+        const player = players.find((x) => x.firstName === name);
+        if(player){
+            return player
+        }else{
+            return {firstName: "", lastName: ""}
+        }
+    }
+
+    const setValueSurname = () => {
+        const player = players.find((x) => x.lastName === surname);
+        if(player){
+            return player
+        }else{
+            return {firstName: "", lastName: ""}
+        }
+    }
+
+
+
     return (
 
         <div>
@@ -56,10 +123,34 @@ function CreatePlayer() {
                     <form onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <TextField fullWidth  label="Name" variant="outlined" value={name} onChange={(event) => setName(event.target.value)}/>
+                            <Autocomplete
+                                options={players}
+                                getOptionLabel={(option:{firstName: string, lastName: string}) => option.firstName}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        label="Name"
+                                        onChange={e => setSearchTerm(e.target.value)}
+                                    />
+                                )}
+                                onChange={handleOptionSelect}
+                                value={setValueName()}
+                            />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField fullWidth  label="Surname" variant="outlined" value={surname} onChange={(event) => setSurname(event.target.value)}/>
+                            <Autocomplete
+                                options={players}
+                                getOptionLabel={(option:{firstName: string, lastName: string}) => option.lastName}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        label="Surname"
+                                        onChange={e => setSearchTerm(e.target.value)}
+                                    />
+                                )}
+                                onChange={handleOptionSelect}
+                                value={setValueSurname()}
+                            />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField fullWidth label="Position" variant="outlined" value={position} onChange={(event) => setPosition(event.target.value)}/>
