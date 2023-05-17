@@ -59,7 +59,11 @@ function GameStats() {
   const [selectedPlayerHomeId, setSelectedPlayerHomeId] = useState<string>("");
   const [selectedPlayerAwayId, setSelectedPlayerAwayId] = useState<string>("");
 
-  console.log(selectedPlayerAwayId);
+  const [selectedPlayerForFaultHomeId, setSelectedPlayerForFaultHomeId] =
+    useState<string>("");
+
+  const [selectedPlayerForFaultAwayId, setSelectedPlayerForFaultAwayId] =
+    useState<string>("");
 
   useEffect(() => {
     getGame(gameId);
@@ -112,6 +116,33 @@ function GameStats() {
     }
   };
 
+  const handleFaults = async (playerId: string, faults: number) => {
+    const url = "http://localhost:8080/game/player_foul";
+    const data = {
+      player_id: playerId,
+      game_id: gameId,
+      faults: faults.toString(),
+    };
+
+    console.log(data);
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const responseData = await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -122,6 +153,7 @@ function GameStats() {
       {game && (
         <>
           <h4>Game Stats Screen</h4>
+          {/* scores */}
           <div
             style={{
               display: "flex",
@@ -262,6 +294,103 @@ function GameStats() {
               </button>
             </div>
           </div>
+
+          {/* faults */}
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignContent: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-around",
+              }}
+            >
+              <div>
+                <h4>Faltas:</h4>
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-around",
+              }}
+            >
+              <div>
+                <InputLabel id="jugador-select-label">Jugador</InputLabel>
+                <Select
+                  label="Jugador"
+                  labelId="jugador-select-label"
+                  id="demo-simple-select"
+                  style={{ width: "200px" }}
+                  onChange={(event) => {
+                    setSelectedPlayerForFaultHomeId(
+                      event.target.value as string
+                    );
+                  }}
+                >
+                  {game?.playersHomeTeamWithInfo.map((player) => (
+                    <MenuItem value={player.player_id}>
+                      {player.player_name} {player.player_surname}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </div>
+              <div>
+                <InputLabel id="jugador-select-label">Jugador</InputLabel>
+                <Select
+                  label="Jugador"
+                  labelId="jugador-select-label"
+                  id="demo-simple-select"
+                  style={{ width: "200px" }}
+                  onChange={(event) => {
+                    setSelectedPlayerForFaultAwayId(
+                      event.target.value as string
+                    );
+                  }}
+                >
+                  {game?.playersAwayTeamWithInfo.map((player) => (
+                    <MenuItem value={player.player_id}>
+                      {player.player_name} {player.player_surname}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-around",
+                marginBottom: "5px",
+                marginTop: "15px",
+              }}
+            >
+              <button
+                onClick={() => {
+                  handleFaults(selectedPlayerForFaultHomeId, 1);
+                }}
+              >
+                +1
+              </button>
+              |
+              <button
+                onClick={() => {
+                  handleFaults(selectedPlayerForFaultAwayId, 1);
+                }}
+              >
+                +1
+              </button>
+            </div>
+          </div>
+          {/*  */}
 
           <List style={{ width: "1080px" }}>
             <h2>ScoreBoard</h2>
